@@ -1,5 +1,6 @@
 # my ignores
 ll_env/
+.idea/
 
 # Django #
 *.log
