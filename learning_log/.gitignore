@@ -1,3 +1,6 @@
+# my ignores
+ll_env/
+
 # Django #
 *.log
 *.pot
