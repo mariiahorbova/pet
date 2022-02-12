@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 
@@ -22,7 +22,7 @@ def topics(request):
 @login_required
 def topic(request, topic_id):
     """Show a single topic and all its entries"""
-    topic = Topic.objects.get(id=topic_id)
+    topic = get_object_or_404(Topic, id=topic_id)
     # Make sure that theme belongs to current user
     check_topic_owner(topic.owner, request)
 

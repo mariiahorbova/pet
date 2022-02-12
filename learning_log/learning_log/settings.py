@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -27,17 +26,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
     # my apps
     "learning_logs",
     "users",
-
     # Third-party apps
-    'bootstrap4',
-
+    "bootstrap4",
     # default apps
     "django.contrib.admin",
     "django.contrib.auth",
@@ -59,10 +55,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "learning_log.urls"
 
+import os
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -77,7 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "learning_log.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -87,7 +84,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -107,7 +103,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -118,7 +113,6 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -135,5 +129,12 @@ LOGIN_URL = "users:login"
 
 # Heroku settings
 import django_heroku
+
 django_heroku.settings(locals())
 
+import os
+
+if os.environ.get("DEBUG") == "TRUE":
+    DEBUG = True
+elif os.environ.get("DEBUG") == "FALSE":
+    DEBUG = False
